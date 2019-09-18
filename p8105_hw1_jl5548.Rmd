@@ -72,6 +72,15 @@ df2 = tibble(
 This dataset has `r nrow(df2)` rows and `r ncol(df2)` columns. The mean of x in the dataset is `r mean(pull(df2, x))`, the median of x is `r median(pull(df2, x))`, and the standard deviation is `r sd(pull(df2, x))`. In `r sum(pull(df2, vec_log) == TRUE)` of the `r nrow(df2)` cases, x + y > 1.
 
 ```{r yx_scatter}
-ggplot(df2, aes(x = x, y = y)) + geom_point(color = 'plum')
+scatter_log = ggplot(df2, aes(x = x, y = y, color = vec_log)) + geom_point() + labs(title = "scatterplot by logical variable", x = "x", y = "y")
+ggsave("scatter_log.png")
+scatter_log
+scatter_num = ggplot(df2, aes(x = x, y = y, color = vec_num)) + geom_point() + labs(title = "scatterplot by numerical variable", x = "x", y = "y")
+scatter_num
+scatter_fac = ggplot(df2, aes(x = x, y = y, color = vec_fac)) + geom_point() + labs(title = "scatterplot by factor variable", x = "x", y = "y")
+scatter_fac
 ```
 
+As depicted in the first scatterplot (scatter_log), the TRUE ones (x + y > 1) are in green and FALSE ones (x + y < 1) are in red. The color of each point is determined by the logical vector of the data set df2. 
+As depicted in the second scatterplot (scatter_num), data points with a value of 1 (x + y > 1) are in green and data points with a value of 0 (x + y < 1) are in red. In fact, the color distribution is similar to the first scatterplot, as the color of each point is determined by the numerical vector of the data set df2, and the numerical vector is created by coercing the logical vector.
+As depicted in the third scatterplot (scatter_fac), similar to the first scatterplot, the TRUE ones (x + y > 1) are in green and FALSE ones (x + y < 1) are in red. The color of each point is determined by the factor vector of the data set df2. The color distribution is similar to the first scatterplot, as the color of each point is determined by the factor vector of the data set df2, and the factor vector is created by coercing the logical vector.
