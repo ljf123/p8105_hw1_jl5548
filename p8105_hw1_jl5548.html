@@ -187,17 +187,47 @@ summary {
 
 <div id="problem-1" class="section level2">
 <h2>Problem 1</h2>
-<p>The chunk below creates a data frame comprised of: * a random sample of size 8 from a standard Normal distribution * a logical vector indicating whether elements of the sample are greater than 0 * a character vector of length 8 * a factor vector of length 8, with 3 different factor “levels”</p>
+</div>
+<div id="create-a-data-frame" class="section level1">
+<h1>Create a data frame</h1>
+<ol style="list-style-type: decimal">
+<li>The chunk below creates a data frame comprised of:</li>
+</ol>
+<ul>
+<li>a random sample of size 8 from a standard Normal distribution</li>
+<li>a logical vector indicating whether elements of the sample are greater than 0</li>
+<li>a character vector of length 8</li>
+<li>a factor vector of length 8, with 3 different factor “levels”</li>
+</ul>
 <pre class="r"><code>df = tibble(
   vec_numeric = rnorm(8),
   vec_logical = vec_numeric &gt; 0,
   vec_char = c(&quot;s&quot;, &quot;o&quot;, &quot;m&quot;, &quot;e&quot;, &quot;c&quot;, &quot;h&quot;, &quot;a&quot;, &quot;r&quot;),
   vec_factor = factor(c(&quot;butterfly&quot;, &quot;dream&quot;, &quot;Zhuang&quot;, &quot;dream&quot;, &quot;butterfly&quot;, &quot;dream&quot;, &quot;Zhuang&quot;, &quot;dream&quot;))
 )</code></pre>
-<p>The mean of the numeric vector is -0.1099472. The mean of the logical vector is 0.625. The mean of the character vector is NA. The mean of the factor vector is NA. As illustrated above, taking the mean of the numeric and logical vectors works, but taking the mean of the character and factor vectors does not work.</p>
-</div>
+<ol start="2" style="list-style-type: decimal">
+<li>Try to take the mean of each variable in the dataframe</li>
+</ol>
+<ul>
+<li>The mean of the numeric vector is -0.0291485.</li>
+<li>The mean of the logical vector is 0.375.</li>
+<li>The mean of the character vector is NA.</li>
+<li>The mean of the factor vector is NA. As illustrated above, taking the mean of the numeric and logical vectors works, but taking the mean of the character and factor vectors does not work. Taking the mean of logical vector works because R is assigning numeric values to the logical vector (1 to all true values and 0 to all flase ones). Therefore taking the mean of logical vectors works as well.</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Write a code chunk that applies the <em>as.numeric</em> function to the logical, character, and factor variables</li>
+</ol>
+<ul>
+<li>convert the logical vector to numeric, and multiply the random sample by the result</li>
+<li></li>
+<li></li>
+</ul>
+<pre class="r"><code>log2num = as.numeric(vec_logical) * vec_numeric
+log2fac = as.factor(vec_logical) * vec_numeric
+log2fac2num = as.numeric(as.factor(vec_logical)) * vec_numeric</code></pre>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>
+</div>
 </div>
 
 

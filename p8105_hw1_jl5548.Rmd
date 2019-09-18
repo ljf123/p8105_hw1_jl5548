@@ -12,7 +12,9 @@ library(tidyverse)
 
 ## Problem 1
 
-The chunk below creates a data frame comprised of:
+# Create a data frame
+
+1. The chunk below creates a data frame comprised of:
 * a random sample of size 8 from a standard Normal distribution
 * a logical vector indicating whether elements of the sample are greater than 0
 * a character vector of length 8
@@ -27,11 +29,24 @@ df = tibble(
 )
 ```
 
-The mean of the numeric vector is `r mean(df$vec_numeric)`.
-The mean of the logical vector is `r mean(df$vec_logical)`.
-The mean of the character vector is `r mean(df$vec_character)`.
-The mean of the factor vector is `r mean(df$vec_factor)`.
-As illustrated above, taking the mean of the numeric and logical vectors works, but taking the mean of the character and factor vectors does not work.
+2. Try to take the mean of each variable in the dataframe
+* The mean of the numeric vector is `r mean(df$vec_numeric)`.
+* The mean of the logical vector is `r mean(df$vec_logical)`.
+* The mean of the character vector is `r mean(df$vec_character)`.
+* The mean of the factor vector is `r mean(df$vec_factor)`.
+As illustrated above, taking the mean of the numeric and logical vectors works, but taking the mean of the character and factor vectors does not work. Taking the mean of logical vector works because R is assigning numeric values to the logical vector (1 to all true values and 0 to all flase ones). Therefore taking the mean of logical vectors works as well.
+
+3. Write a code chunk that applies the *as.numeric* function to the logical, character, and factor variables
+* convert the logical vector to numeric, and multiply the random sample by the result
+*
+*
+
+```{r, eval=FALSE}
+log2num = as.numeric(vec_logical) * vec_numeric
+log2fac = as.factor(vec_logical) * vec_numeric
+log2fac2num = as.numeric(as.factor(vec_logical)) * vec_numeric
+```
+
 
 
 ## Problem 2
