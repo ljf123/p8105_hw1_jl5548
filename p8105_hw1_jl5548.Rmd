@@ -21,7 +21,7 @@ library(tidyverse)
 * a factor vector of length 8, with 3 different factor "levels"
 
 ```{r}
-df = tibble(
+df1 = tibble(
   vec_numeric = rnorm(8),
   vec_logical = vec_numeric > 0,
   vec_char = c("s", "o", "m", "e", "c", "h", "a", "r"),
@@ -30,10 +30,10 @@ df = tibble(
 ```
 
 2. Try to take the mean of each variable in the dataframe
-* The mean of the numeric vector is `r mean(df$vec_numeric)`.
-* The mean of the logical vector is `r mean(df$vec_logical)`.
-* The mean of the character vector is `r mean(df$vec_character)`.
-* The mean of the factor vector is `r mean(df$vec_factor)`.
+* The mean of the numeric vector is `r mean(pull(df1, vec_numeric))`.
+* The mean of the logical vector is `r mean(pull(df1, vec_logical))`.
+* The mean of the character vector is `r mean(pull(df1, vec_char))`.
+* The mean of the factor vector is `r mean(pull(df1, vec_factor))`.
 
 As illustrated above, taking the mean of the numeric and logical vectors works, but taking the mean of the character and factor vectors does not work. Taking the mean of logical vector works because R is assigning numeric values to the logical vector (1 to all true values and 0 to all flase ones). Therefore taking the mean of logical vectors works as well.
 
@@ -43,17 +43,31 @@ As illustrated above, taking the mean of the numeric and logical vectors works, 
 * convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result
 
 ```{r, eval=FALSE}
-log2num = as.numeric(df$vec_logical) * df$vec_numeric
-log2fac = as.factor(df$vec_logical) * df$vec_numeric
-log2fac2num = as.numeric(as.factor(df$vec_logical)) * df$vec_numeric
+log2num = as.numeric(pull(df1, vec_logical)) * pull(df1, vec_numeric)
+log2fac = as.factor(pull(df1, vec_logical)) * pull(df1, vec_numeric)
+log2fac2num = as.numeric(as.factor(pull(df1, vec_logical))) * pull(df1, vec_numeric)
 ```
 
 From the results, log2fac returns a vector of 8 NAs, and it shows the warning that "'*' not meaningful for factors", because factor vectors cannot be converted to numeirc values. This also explains why it failed to take the mean of factor vectors. Since factor vectors do not have numeric values, it is not meaningful to take the mean of them, and therefore we got NAs and warning messages. 
 
 ## Problem 2
 
+1. Create a data frame comprised of:
+* x: a random sample of size 500 from a standard Normal distribution
+* y: a random sample of size 500 from a standard Normal distribution
+* A logical vector indicating whether x + y > 1
+* A numeric vector created by coercing the above logical vector
+* A factor vector created by coercing the above logical vector
 
 ```{r}
-
+df2 = tibble(
+  x = rnorm(500),
+  y = rnorm(500),
+  vec_log = x + y > 1,
+  vec_num = as.numeric(vec_log),
+  vec_fac = as.factor(vec_log)
+)
 ```
+
+This dataset has `r nrow(df2)` rows and `r ncol(df2)` columns. The mean of x in the dataset is `r mean(pull(df2, x))`, the median of x is `r median(pull(df2, x))`, and the standard deviation is `r sd(pull(df2, x))`. 
 

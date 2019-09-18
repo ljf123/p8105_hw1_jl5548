@@ -199,7 +199,7 @@ summary {
 <li>a character vector of length 8</li>
 <li>a factor vector of length 8, with 3 different factor “levels”</li>
 </ul>
-<pre class="r"><code>df = tibble(
+<pre class="r"><code>df1 = tibble(
   vec_numeric = rnorm(8),
   vec_logical = vec_numeric &gt; 0,
   vec_char = c(&quot;s&quot;, &quot;o&quot;, &quot;m&quot;, &quot;e&quot;, &quot;c&quot;, &quot;h&quot;, &quot;a&quot;, &quot;r&quot;),
@@ -209,8 +209,8 @@ summary {
 <li>Try to take the mean of each variable in the dataframe</li>
 </ol>
 <ul>
-<li>The mean of the numeric vector is 0.4386342.</li>
-<li>The mean of the logical vector is 0.75.</li>
+<li>The mean of the numeric vector is -0.194498.</li>
+<li>The mean of the logical vector is 0.375.</li>
 <li>The mean of the character vector is NA.</li>
 <li>The mean of the factor vector is NA.</li>
 </ul>
@@ -223,12 +223,29 @@ summary {
 <li>convert the logical vector to a factor, and multiply the random sample by the result</li>
 <li>convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result</li>
 </ul>
-<pre class="r"><code>log2num = as.numeric(df$vec_logical) * df$vec_numeric
-log2fac = as.factor(df$vec_logical) * df$vec_numeric
-log2fac2num = as.numeric(as.factor(df$vec_logical)) * df$vec_numeric</code></pre>
+<pre class="r"><code>log2num = as.numeric(pull(df1, vec_logical)) * pull(df1, vec_numeric)
+log2fac = as.factor(pull(df1, vec_logical)) * pull(df1, vec_numeric)
+log2fac2num = as.numeric(as.factor(pull(df1, vec_logical))) * pull(df1, vec_numeric)</code></pre>
 <p>From the results, log2fac returns a vector of 8 NAs, and it shows the warning that “’*’ not meaningful for factors“, because factor vectors cannot be converted to numeirc values. This also explains why it failed to take the mean of factor vectors. Since factor vectors do not have numeric values, it is not meaningful to take the mean of them, and therefore we got NAs and warning messages.</p>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>
+<ol style="list-style-type: decimal">
+<li>Create a data frame comprised of:</li>
+</ol>
+<ul>
+<li>x: a random sample of size 500 from a standard Normal distribution</li>
+<li>y: a random sample of size 500 from a standard Normal distribution</li>
+<li>A logical vector indicating whether x + y &gt; 1</li>
+<li>A numeric vector created by coercing the above logical vector</li>
+<li>A factor vector created by coercing the above logical vector</li>
+</ul>
+<pre class="r"><code>df2 = tibble(
+  x = rnorm(500),
+  y = rnorm(500),
+  vec_log = x + y &gt; 1,
+  vec_num = as.numeric(vec_log),
+  vec_fac = as.factor(vec_log)
+)</code></pre>
 </div>
 </div>
 
