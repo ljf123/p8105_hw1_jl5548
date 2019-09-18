@@ -209,22 +209,24 @@ summary {
 <li>Try to take the mean of each variable in the dataframe</li>
 </ol>
 <ul>
-<li>The mean of the numeric vector is -0.0291485.</li>
-<li>The mean of the logical vector is 0.375.</li>
+<li>The mean of the numeric vector is 0.4386342.</li>
+<li>The mean of the logical vector is 0.75.</li>
 <li>The mean of the character vector is NA.</li>
-<li>The mean of the factor vector is NA. As illustrated above, taking the mean of the numeric and logical vectors works, but taking the mean of the character and factor vectors does not work. Taking the mean of logical vector works because R is assigning numeric values to the logical vector (1 to all true values and 0 to all flase ones). Therefore taking the mean of logical vectors works as well.</li>
+<li>The mean of the factor vector is NA.</li>
 </ul>
+<p>As illustrated above, taking the mean of the numeric and logical vectors works, but taking the mean of the character and factor vectors does not work. Taking the mean of logical vector works because R is assigning numeric values to the logical vector (1 to all true values and 0 to all flase ones). Therefore taking the mean of logical vectors works as well.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Write a code chunk that applies the <em>as.numeric</em> function to the logical, character, and factor variables</li>
 </ol>
 <ul>
 <li>convert the logical vector to numeric, and multiply the random sample by the result</li>
-<li></li>
-<li></li>
+<li>convert the logical vector to a factor, and multiply the random sample by the result</li>
+<li>convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result</li>
 </ul>
-<pre class="r"><code>log2num = as.numeric(vec_logical) * vec_numeric
-log2fac = as.factor(vec_logical) * vec_numeric
-log2fac2num = as.numeric(as.factor(vec_logical)) * vec_numeric</code></pre>
+<pre class="r"><code>log2num = as.numeric(df$vec_logical) * df$vec_numeric
+log2fac = as.factor(df$vec_logical) * df$vec_numeric
+log2fac2num = as.numeric(as.factor(df$vec_logical)) * df$vec_numeric</code></pre>
+<p>From the results, log2fac returns a vector of 8 NAs, and it shows the warning that “’*’ not meaningful for factors“, because factor vectors cannot be converted to numeirc values. This also explains why it failed to take the mean of factor vectors. Since factor vectors do not have numeric values, it is not meaningful to take the mean of them, and therefore we got NAs and warning messages.</p>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>
 </div>
