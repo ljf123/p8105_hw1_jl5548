@@ -69,5 +69,5 @@ df2 = tibble(
 )
 ```
 
-This dataset has `r nrow(df2)` rows and `r ncol(df2)` columns. The mean of x in the dataset is `r mean(pull(df2, x))`, the median of x is `r median(pull(df2, x))`, and the standard deviation is `r sd(pull(df2, x))`. 
+This dataset has `r nrow(df2)` rows and `r ncol(df2)` columns. The mean of x in the dataset is `r mean(pull(df2, x))`, the median of x is `r median(pull(df2, x))`, and the standard deviation is `r sd(pull(df2, x))`. In `r sum(pull(df2, vec_log) == TRUE)` of the `r nrow(df2)` cases, x + y > 1.
 
